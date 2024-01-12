@@ -1,0 +1,39 @@
+apiVersion: skaffold/v4beta6
+kind: Config
+manifests:
+  rawYaml:
+    - ./infra/k8s/**/*
+    # - ./infra/k8s/ingress-nginx/*
+build:
+  local:
+    push: false
+  # googleCloudBuild:
+  # projectId: ticketing-dev-398815
+  artifacts:
+    - image: teclegacy/ticket/auth
+      # - image: gcr.io/ticketing-dev-398815/auth
+      context: auth
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+    - image: teclegacy/ticket-img
+      # - image: gcr.io/ticketing-dev-398815/tickets
+      context: tickets
+      sync:
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+      docker:
+        dockerfile: Dockerfile
+
+    - image: teclegacy/client-next
+      context: client
+      sync:
+        manual:
+          - src: 'src/**/*.{ts,tsx}'
+            dest: .
+      docker:
+        dockerfile: Dockerfile

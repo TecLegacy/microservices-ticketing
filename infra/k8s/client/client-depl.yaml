@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+        # image: gcr.io/ticketing-dev-398815/client
+        - name: client-depl
+          image: teclegacy/client-next
+          imagePullPolicy: Never
+          # resources:
+          #   limits:
+          #     cpu: '1'
+          #     memory: '512Mi'
+          #   requests:
+          #     cpu: '500m'
+          #     memory: '256Mi'

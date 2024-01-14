@@ -23,7 +23,7 @@ export async function createJwtSession() {
     price: 10,
   };
   //Create a Jwt token
-  const jwtPayload = jwt.sign(payload, 'tickets');
+  const jwtPayload = jwt.sign(payload, process.env.JWT_KEY!);
   const jwtSession = {
     jwt: jwtPayload,
   };

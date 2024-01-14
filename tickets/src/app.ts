@@ -5,6 +5,7 @@ import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
 
 import {
+  currentUser,
   errorHandler,
   NotFoundError,
 } from '@webcafetickets/shared-auth-middleware';
@@ -20,7 +21,12 @@ app.use(
     secure: process.env.NODE_ENV !== 'test', // Only use cookies if user is visiting our app over https connection
   })
 );
+// check if currentUser has Session-cookie attach
+app.use(currentUser);
+
+//Routes
 app.use(tickets);
+
 app.all('*', (_, __, next: NextFunction) => {
   // next(new NotFoundError());
   throw new NotFoundError();

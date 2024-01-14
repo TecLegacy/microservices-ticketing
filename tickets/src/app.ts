@@ -8,6 +8,7 @@ import {
   errorHandler,
   NotFoundError,
 } from '@webcafetickets/shared-auth-middleware';
+import { tickets } from './routes/new';
 
 const app = express();
 app.set('trust proxy', true); // Trust traffic from ingress-nginx
@@ -19,7 +20,7 @@ app.use(
     secure: process.env.NODE_ENV !== 'test', // Only use cookies if user is visiting our app over https connection
   })
 );
-
+app.use(tickets);
 app.all('*', (_, __, next: NextFunction) => {
   // next(new NotFoundError());
   throw new NotFoundError();

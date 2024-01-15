@@ -8,15 +8,6 @@ import { Ticket } from '../model/tickets';
 // import { Ticket } from '@/model/tickets';
 const router = express.Router();
 
-export interface UserPayload {
-  id: string;
-  email: string;
-}
-
-router.get('/api/tickets', (req: Request, res: Response) => {
-  res.sendStatus(200);
-});
-
 router.post(
   '/api/tickets',
   isAuthenticated,
@@ -42,4 +33,4 @@ router.post(
   }
 );
 
-export { router as tickets };
+export { router as createTicket };

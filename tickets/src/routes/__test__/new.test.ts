@@ -4,10 +4,10 @@ import { createJwtSession } from '../../test/session-helper';
 // import { Ticket } from '@/model/tickets';
 import { Ticket } from '../../model/tickets';
 
-describe('Ticket API', () => {
-  it('returns 200 for GET /api/tickets', async () => {
-    const res = await request(app).get('/api/tickets');
-    expect(res.status).toEqual(200);
+describe('Ticket API Creation', () => {
+  it('returns other than 404 for post /api/tickets', async () => {
+    const res = await request(app).post('/api/tickets').send({});
+    expect(res.status).not.toEqual(404);
   });
 
   it('returns 401 for POST /api/tickets when not authenticated', async () => {
@@ -33,6 +33,7 @@ describe('Ticket API', () => {
       .set('Cookie', cookie)
       .send({ title: '', price: 10 })
       .expect(400);
+
     await request(app)
       .post('/api/tickets')
       .set('Cookie', cookie)

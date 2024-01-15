@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 // declare global {
 //   var signin: () => string[];
 // }
@@ -19,8 +20,9 @@ import jwt from 'jsonwebtoken';
 
 export function createJwtSession() {
   const payload = {
-    title: 'test',
-    price: 10,
+    id: new mongoose.Types.ObjectId().toHexString(),
+    // id: '12313x',
+    email: 'test@test.com',
   };
   //Create a Jwt token
   const jwtPayload = jwt.sign(payload, process.env.JWT_KEY!);

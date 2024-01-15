@@ -17,7 +17,7 @@ import jwt from 'jsonwebtoken';
 //   return [`session=${base64}`];
 // };
 
-export async function createJwtSession() {
+export function createJwtSession() {
   const payload = {
     title: 'test',
     price: 10,

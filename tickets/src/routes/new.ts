@@ -4,8 +4,8 @@ import {
   validateRequest,
 } from '@webcafetickets/shared-auth-middleware';
 import { body } from 'express-validator';
-// import { Ticket } from '@/model/tickets';
 import { Ticket } from '../model/tickets';
+// import { Ticket } from '@/model/tickets';
 const router = express.Router();
 
 export interface UserPayload {

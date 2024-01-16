@@ -21,7 +21,6 @@ import mongoose from 'mongoose';
 export function createJwtSession() {
   const payload = {
     id: new mongoose.Types.ObjectId().toHexString(),
-    // id: '12313x',
     email: 'test@test.com',
   };
   //Create a Jwt token

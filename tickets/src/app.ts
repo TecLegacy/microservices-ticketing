@@ -10,6 +10,9 @@ import {
   NotFoundError,
 } from '@webcafetickets/shared-auth-middleware';
 import { createTicket } from './routes/new';
+import { showTickets } from './routes/show';
+import { allTickets } from './routes';
+import { updateTicket } from './routes/update';
 
 const app = express();
 app.set('trust proxy', true); // Trust traffic from ingress-nginx
@@ -26,6 +29,9 @@ app.use(currentUser);
 
 //Routes
 app.use(createTicket);
+app.use(showTickets);
+app.use(allTickets);
+app.use(updateTicket);
 
 app.all('*', (_, __, next: NextFunction) => {
   // next(new NotFoundError());

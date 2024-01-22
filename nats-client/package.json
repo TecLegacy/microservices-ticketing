@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "publish": "ts-node-dev --respawn --rs --notify false --ignore-watch node_modules src/publisher.ts",
-    "listen": "ts-node-dev --respawn --rs --notify false --ignore-watch node_modules src/publisher.ts"
+    "listen": "ts-node-dev --respawn --rs --notify false --ignore-watch node_modules src/listener.ts"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,6 @@
 import nats, { Message } from 'node-nats-streaming';
 import { randomBytes } from 'crypto';
+import { TicketCreatedListener } from './events/ticket-listener';
 
 console.clear();
 
@@ -15,23 +16,31 @@ stan.on('connect', () => {
     process.exit();
   });
 
-  const options = stan.subscriptionOptions().setManualAckMode(true);
-  const subscription = stan.subscribe(
-    'ticket:created',
-    'ticket-queue-group',
-    options
-  );
+  new TicketCreatedListener(stan).listen();
 
-  subscription.on('message', (msg: Message) => {
-    const sequence = msg.getSequence();
-    const data = msg.getData();
+  // const options = stan
+  //   .subscriptionOptions()
+  //   .setManualAckMode(true)
+  //   .setAckWait(5000)
+  //   .setDeliverAllAvailable()
+  //   .setDurableName('ticket-service');
 
-    if (typeof data === 'string') {
-      console.log('Received a message [' + sequence + '] ' + data);
-    }
+  // const subscription = stan.subscribe(
+  //   'ticket:created',
+  //   'ticket-queue-group',
+  //   options
+  // );
 
-    msg.ack();
-  });
+  // subscription.on('message', (msg: Message) => {
+  //   const sequence = msg.getSequence();
+  //   const data = msg.getData();
+
+  //   if (typeof data === 'string') {
+  //     console.log('Received a message [' + sequence + '] ' + data);
+  //   }
+
+  //   msg.ack();
+  // });
 });
 
 // gracefully shutdown on interruption & termination

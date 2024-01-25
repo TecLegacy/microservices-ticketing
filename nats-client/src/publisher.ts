@@ -6,8 +6,12 @@ const stan = nats.connect('ticketing', 'abc', {
 
 stan.on('connect', () => {
   console.log('Connected');
-
-  stan.publish('ticket:created', 'hello', (err, guid) => {
+  const ticket = {
+    id: 1,
+    price: 20,
+    title: 'concert',
+  };
+  stan.publish('ticket:created', JSON.stringify(ticket), (err, guid) => {
     if (err) {
       console.log('publish failed: ' + err);
     } else {

@@ -1,6 +1,6 @@
 {
   "name": "@webcafetickets/pub-sub",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -8,7 +8,7 @@
     "build/**/*"
   ],
   "scripts": {
-    "git-clean": "rm -rf .git",
+    "git-clean": "del .git",
     "clean": "del ./build",
     "build": "npm run clean && npm run git-clean && tsc",
     "pub": "git init && git add . && git commit -m \"$npm_config_message\" && npm version patch && npm run build && npm publish"
@@ -22,7 +22,6 @@
   },
   "devDependencies": {
     "del-cli": "^5.1.0",
-    "rimraf": "^5.0.5",
     "typescript": "^5.3.3"
   }
 }

@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { app } from './app';
-
+import { natsClient } from './nats-client';
 const startUp = async () => {
   if (!process.env.JWT_KEY) {
     throw new Error('JWT_KEY must be defined');
@@ -10,13 +10,18 @@ const startUp = async () => {
   }
 
   try {
+    await natsClient.connect(
+      'ticketing',
+      'randomclient',
+      'http://nats-streaming-srv:4222'
+    );
     await mongoose.connect(process.env.MONGO_URI!);
-    console.log('Connected to MongoDb');
+    console.log('Connected to MongoDB');
   } catch (err) {
     console.error(err);
   }
   app.listen(3000, () => {
-    console.log('Server running on port 3000!!');
+    console.log('Server running on port 3000!');
   });
 };
 

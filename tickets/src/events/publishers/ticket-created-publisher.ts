@@ -1,3 +1,9 @@
-// import { Publisher } from '@webcafetickets/pub-sub';
-import { Publisher } from '@webcafetickets/pub-sub';
-import {} from '@webcafetickets/shared-auth-middleware';
+import {
+  Publisher,
+  Subject,
+  TicketCreatedEvent,
+} from '@webcafetickets/pub-sub';
+
+export class TicketCreatedPublisher extends Publisher<TicketCreatedEvent> {
+  readonly subject = Subject.TicketCreated;
+}

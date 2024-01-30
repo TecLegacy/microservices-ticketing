@@ -5,6 +5,8 @@ import {
 } from '@webcafetickets/shared-auth-middleware';
 import { body } from 'express-validator';
 import { Ticket } from '../model/tickets';
+import { TicketCreatedPublisher } from '../events/publishers/ticket-created-publisher';
+import { natsClient } from '../nats-client';
 // import { Ticket } from '@/model/tickets';
 const router = express.Router();
 
@@ -26,9 +28,14 @@ router.post(
       price,
       userId: req.currentUser!.id,
     });
-
+    console.log('tickets', ticket);
     await ticket.save();
-
+    await new TicketCreatedPublisher(natsClient.client).publish({
+      title: ticket.title,
+      price: ticket.price,
+      id: ticket.id,
+      userId: ticket.userId,
+    });
     res.status(201).send(ticket);
   }
 );

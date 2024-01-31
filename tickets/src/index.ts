@@ -15,6 +15,20 @@ const startUp = async () => {
       'randomclient',
       'http://nats-streaming-srv:4222'
     );
+
+    natsClient.client.on('close', () => {
+      console.log('Nats Shutting down');
+      process.exit();
+    });
+    process.on('SIGINT', () => {
+      console.log('SIGINT received');
+      natsClient.client.close();
+    });
+    process.on('SIGTERM', () => {
+      console.log('SIGTERM received');
+      natsClient.client.close();
+    });
+
     await mongoose.connect(process.env.MONGO_URI!);
     console.log('Connected to MongoDB');
   } catch (err) {

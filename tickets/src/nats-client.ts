@@ -18,10 +18,6 @@ class NatsClient {
       // this._stan!.on('error', err => {
       //   reject(`Stan wrapper Reject ${err}`);
       // });
-
-      // this._stan!.on('connect', (err, guid) => {
-      //   console.log('Connected To NATS!!');
-      // });
       this.client.on('error', err => {
         reject(`Stan wrapper Reject ${err}`);
       });

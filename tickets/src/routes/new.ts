@@ -28,7 +28,7 @@ router.post(
       price,
       userId: req.currentUser!.id,
     });
-    console.log('tickets', ticket);
+
     await ticket.save();
     await new TicketCreatedPublisher(natsClient.client).publish({
       title: ticket.title,
@@ -36,6 +36,7 @@ router.post(
       id: ticket.id,
       userId: ticket.userId,
     });
+
     res.status(201).send(ticket);
   }
 );

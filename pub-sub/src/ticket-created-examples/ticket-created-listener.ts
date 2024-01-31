@@ -5,7 +5,7 @@ import { Subject } from '../nats-config/subject';
 
 export class TicketCreatedListener extends Listener<TicketCreatedEvent> {
   // subject = 'ticket:created';
-  subject = Subject.TicketCreated;
+  readonly subject = Subject.TicketCreated;
   queueGroupName = 'payments-service';
 
   onMessage(data: TicketCreatedEvent['data'], msg: Message): void {

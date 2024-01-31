@@ -3,5 +3,5 @@ import { Subject } from '../nats-config/subject';
 import { TicketCreatedEvent } from '../events/ticket-created-event';
 
 export class TicketCreatedPublisher extends Publisher<TicketCreatedEvent> {
-  subject = Subject.TicketCreated;
+  readonly subject = Subject.TicketCreated;
 }

@@ -1,7 +1,7 @@
 import { Subject } from '../nats-config/subject';
 
-export interface TicketCreatedEvent {
-  subject: Subject.TicketCreated;
+export interface TicketUpdatedEvent {
+  subject: Subject.TicketUpdated;
   data: {
     id: string;
     title: string;

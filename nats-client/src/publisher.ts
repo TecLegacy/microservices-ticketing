@@ -1,5 +1,5 @@
 import nats from 'node-nats-streaming';
-import { TicketCreatedPublisher } from './events/ticket-created-publisher';
+import { TicketCreatedPublisher } from './events/publisher/ticket-created-publisher';
 console.clear();
 const stan = nats.connect('ticketing', 'abc', {
   url: 'http://localhost:4222',
